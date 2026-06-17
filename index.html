@@ -14,75 +14,118 @@
   --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
   --text:#eef0f4;--text2:#8b92a0;--text3:#555d6b;
   --accent:#4fffb0;--accent2:#00c97a;
+  --red:#ff6b6b;--amber:#ffb84d;
   --font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;
   --r:10px;--r-sm:6px;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;min-height:100vh}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,255,176,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,255,176,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
-.wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
-.site-header{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+/* HEADER */
+.site-header{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
 .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .header-eyebrow{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px}
-.header-title{font-family:var(--font-display);font-size:clamp(26px,4vw,38px);font-weight:700;color:var(--text);line-height:1.1}
+.header-title{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:700;color:var(--text);line-height:1.1}
 .header-title span{color:var(--accent)}
 .header-sub{font-size:13px;color:var(--text2);margin-top:6px}
 .reset-btn{font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--text3);background:none;border:1px solid var(--border2);border-radius:var(--r-sm);padding:7px 14px;cursor:pointer;transition:color 0.2s,border-color 0.2s;white-space:nowrap;margin-top:4px}
-.reset-btn:hover{color:#ff6b6b;border-color:#ff6b6b}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2.5rem}
+.reset-btn:hover{color:var(--red);border-color:var(--red)}
+
+/* MASTER TIMER */
+.master-timer{background:var(--surface);border:1px solid rgba(79,255,176,0.2);border-radius:var(--r);padding:20px 24px;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.master-timer::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(79,255,176,0.05) 0%,transparent 60%);pointer-events:none}
+.master-timer-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.master-timer-units{display:flex;align-items:flex-end;gap:6px;flex-wrap:wrap}
+.timer-unit{text-align:center}
+.timer-num{font-family:var(--font-display);font-size:clamp(26px,5vw,42px);font-weight:700;color:var(--text);line-height:1;display:block}
+.timer-label{font-family:var(--font-mono);font-size:10px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;display:block}
+.timer-sep{font-family:var(--font-display);font-size:30px;color:var(--text3);line-height:1;padding-bottom:8px;user-select:none}
+.master-timer-bar{margin-top:16px;height:3px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.master-timer-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:2px;transition:width 1s linear}
+.master-timer-sub{font-size:12px;color:var(--text3);margin-top:8px;font-family:var(--font-mono)}
+.timer-overdue{color:var(--red)!important}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2rem}
 @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:border-color 0.2s;animation:fadeUp 0.4s ease both}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;transition:border-color 0.2s;animation:fadeUp 0.4s ease both}
 .stat:nth-child(1){animation-delay:0.05s}.stat:nth-child(2){animation-delay:0.1s}.stat:nth-child(3){animation-delay:0.15s}.stat:nth-child(4){animation-delay:0.2s}
 .stat:hover{border-color:var(--border2)}
-.stat-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
-.stat-value{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--text);line-height:1}
-.stat-value .unit{font-family:var(--font-body);font-size:13px;color:var(--text3);font-weight:400;margin-left:2px}
-.section-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;margin-top:2.5rem;display:flex;align-items:center;gap:10px}
+.stat-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
+.stat-value{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--text);line-height:1}
+.stat-value .unit{font-family:var(--font-body);font-size:12px;color:var(--text3);font-weight:400;margin-left:2px}
+
+/* SECTION LABELS */
+.section-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;margin-top:2rem;display:flex;align-items:center;gap:10px}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* COUNTDOWN BADGES (shared) */
+.cd-badge{font-family:var(--font-mono);font-size:10px;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.cd-badge.active{background:rgba(79,255,176,0.1);color:var(--accent)}
+.cd-badge.upcoming{background:rgba(255,255,255,0.05);color:var(--text3)}
+.cd-badge.overdue{background:rgba(255,107,107,0.12);color:var(--red)}
+.cd-badge.complete{background:rgba(0,201,122,0.1);color:var(--accent2)}
+
+/* task-level badge slightly smaller */
+.cd-badge.task-badge{font-size:9px;padding:2px 6px}
+
+/* SPRINT */
 .sprint-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:640px){.sprint-grid{grid-template-columns:1fr}}
-.sprint-col{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.sprint-col{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color 0.2s}
+.sprint-col:hover{border-color:var(--border2)}
 .sprint-head{padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface2)}
+.sprint-head-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .sprint-head-week{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--accent)}
-.sprint-head-sub{font-size:11px;color:var(--text3);margin-top:1px}
+.sprint-head-sub{font-size:11px;color:var(--text3);margin-top:3px}
 .sprint-tasks{padding:10px 16px 14px}
-.stask{display:flex;align-items:flex-start;gap:9px;padding:6px 0}
+.stask{display:flex;align-items:flex-start;gap:9px;padding:6px 0;border-bottom:1px solid var(--border)}
+.stask:last-child{border-bottom:none}
 .stask-box{width:16px;height:16px;border:1px solid var(--border2);border-radius:4px;cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:background 0.15s,border-color 0.15s}
 .stask-box.done{background:#00c97a;border-color:#00c97a}
 .stask-box svg{display:none}.stask-box.done svg{display:block}
-.stask-content{flex:1}
-.stask-label{font-size:12px;color:var(--text2);line-height:1.45;cursor:pointer;transition:color 0.15s}
+.stask-content{flex:1;min-width:0}
+.stask-top{display:flex;align-items:flex-start;justify-content:space-between;gap:6px}
+.stask-label{font-size:12px;color:var(--text2);line-height:1.45;cursor:pointer;transition:color 0.15s;flex:1}
 .stask-label:hover{color:var(--text)}.stask-label.done{color:var(--text3);text-decoration:line-through}
-.stask-link{font-family:var(--font-mono);font-size:10px;color:var(--accent2);text-decoration:none;display:inline-flex;align-items:center;gap:3px;margin-top:3px;opacity:0.8}
+.stask-link{font-family:var(--font-mono);font-size:10px;color:var(--accent2);text-decoration:none;display:inline-flex;align-items:center;gap:3px;margin-top:4px;opacity:0.8}
 .stask-link:hover{opacity:1;text-decoration:underline}
+
+/* PHASES */
 .phase-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;transition:border-color 0.2s}
 .phase-card:hover{border-color:var(--border2)}
 .phase-header{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
 .phase-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:13px;font-weight:700;flex-shrink:0}
-.phase-info{flex:1}
+.phase-info{flex:1;min-width:0}
 .phase-title{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text)}
 .phase-sub{font-size:12px;color:var(--text3);margin-top:1px}
-.phase-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.phase-right{display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
 .phase-pct{font-family:var(--font-mono);font-size:12px;color:var(--text3);min-width:32px;text-align:right}
-.pbar-wrap{width:72px;height:3px;background:var(--surface2);border-radius:2px}
+.pbar-wrap{width:60px;height:3px;background:var(--surface2);border-radius:2px}
 .pbar-fill{height:3px;border-radius:2px;transition:width 0.4s ease}
 .chevron{transition:transform 0.22s;flex-shrink:0}
 .chevron.open{transform:rotate(180deg)}
 .phase-body{display:none;padding:0 18px 16px}
 .phase-body.open{display:block}
+
+/* TASK ROWS */
 .task-row{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}
 .task-row:last-child{border-bottom:none}
-.task-box{width:18px;height:18px;border:1px solid var(--border2);border-radius:5px;cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:background 0.15s,border-color 0.15s}
+.task-box{width:18px;height:18px;border:1px solid var(--border2);border-radius:5px;cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:background 0.15s,border-color 0.15s}
 .task-box.done{background:#00c97a;border-color:#00c97a}
 .task-box svg{display:none}.task-box.done svg{display:block}
-.task-content{flex:1}
-.task-label{font-size:13px;color:var(--text2);line-height:1.5;cursor:pointer;transition:color 0.15s}
+.task-content{flex:1;min-width:0}
+.task-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.task-label{font-size:13px;color:var(--text2);line-height:1.5;cursor:pointer;transition:color 0.15s;flex:1}
 .task-label:hover{color:var(--text)}.task-label.done{color:var(--text3);text-decoration:line-through}
 .task-meta{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
 .task-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border-radius:4px;letter-spacing:0.04em}
 .task-link{font-family:var(--font-mono);font-size:10px;text-decoration:none;display:inline-flex;align-items:center;gap:3px;opacity:0.75;transition:opacity 0.15s}
 .task-link:hover{opacity:1;text-decoration:underline}
 .check-icon{width:10px;height:10px;stroke:#0d0f12;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center}
 .footer p{font-family:var(--font-mono);font-size:11px;color:var(--text3)}
@@ -91,6 +134,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </head>
 <body>
 <div class="wrap">
+
 <header class="site-header">
   <div class="header-top">
     <div>
@@ -101,68 +145,300 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <button class="reset-btn" onclick="resetAll()">↺ Reset all</button>
   </div>
 </header>
+
+<!-- MASTER TIMER -->
+<div class="master-timer">
+  <div class="master-timer-label">⏱ Master Countdown — Roadmap End Date</div>
+  <div class="master-timer-units">
+    <div class="timer-unit"><span class="timer-num" id="t-months">--</span><span class="timer-label">months</span></div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit"><span class="timer-num" id="t-weeks">--</span><span class="timer-label">weeks</span></div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit"><span class="timer-num" id="t-days">--</span><span class="timer-label">days</span></div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit"><span class="timer-num" id="t-hours">--</span><span class="timer-label">hours</span></div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit"><span class="timer-num" id="t-mins">--</span><span class="timer-label">mins</span></div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit"><span class="timer-num" id="t-secs">--</span><span class="timer-label">secs</span></div>
+  </div>
+  <div class="master-timer-bar"><div class="master-timer-bar-fill" id="master-bar-fill" style="width:0%"></div></div>
+  <div class="master-timer-sub" id="master-timer-sub">Started May 26, 2026 · Target: July 26, 2027</div>
+</div>
+
+<!-- STATS -->
 <div class="stats">
   <div class="stat"><div class="stat-label">Overall</div><div class="stat-value" id="stat-overall">0<span class="unit">%</span></div></div>
   <div class="stat"><div class="stat-label">Tasks done</div><div class="stat-value"><span id="stat-done">0</span><span class="unit"> / <span id="stat-total">0</span></span></div></div>
   <div class="stat"><div class="stat-label">Phases started</div><div class="stat-value" id="stat-phases">0<span class="unit"> / 5</span></div></div>
   <div class="stat"><div class="stat-label">90-day sprint</div><div class="stat-value" id="stat-sprint">0<span class="unit">%</span></div></div>
 </div>
+
 <div class="section-label">90-day quick start</div>
 <div class="sprint-grid" id="sprint-grid"></div>
+
 <div class="section-label">Phase roadmap</div>
 <div id="phases-container"></div>
-<footer class="footer"><p>Byron Walton Jr. · MLOps Roadmap · Progress saves to <span>localStorage</span></p></footer>
+
+<footer class="footer"><p>Byron Walton Jr. · MLOps Roadmap · Started <span>May 26, 2026</span> · Progress auto-saves to localStorage</p></footer>
 </div>
+
 <script>
-const PHASES=[{id:'p1',title:'Phase 1 — Python & ML basics',sub:'Months 1–4 · Fill the ML knowledge gap',color:'#a78bfa',numBg:'rgba(167,139,250,0.15)',numColor:'#a78bfa',tasks:[{id:'p1t1',label:'Complete Python for Everybody (Coursera — free to audit)',tag:'course',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://www.coursera.org/specializations/python',linkLabel:'Coursera'},{id:'p1t2',label:'Complete Python Essentials for MLOps (Coursera — Duke)',tag:'course',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://www.coursera.org/learn/python-mlops-duke',linkLabel:'Coursera'},{id:'p1t3',label:'Daily Python practice — 30–45 min on Codewars or HackerRank',tag:'practice',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://www.codewars.com',linkLabel:'Codewars'},{id:'p1t4',label:'Master Python scripting, file I/O, REST APIs, and JSON',tag:'skill',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://docs.python.org/3/tutorial/',linkLabel:'Python docs'},{id:'p1t5',label:'Complete Google ML Crash Course (free, ~15 hours)',tag:'course',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://developers.google.com/machine-learning/crash-course',linkLabel:'Google'},{id:'p1t6',label:"Complete Andrew Ng's Machine Learning Specialization",tag:'course',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://www.coursera.org/specializations/machine-learning-introduction',linkLabel:'Coursera'},{id:'p1t7',label:'Understand model training, evaluation, and overfitting concepts',tag:'skill',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://developers.google.com/machine-learning/crash-course/overfitting/overfitting',linkLabel:'Google ML'}]},{id:'p2',title:'Phase 2 — Core MLOps toolchain',sub:'Months 4–8 · Build the MLOps stack',color:'#4fffb0',numBg:'rgba(79,255,176,0.12)',numColor:'#4fffb0',tasks:[{id:'p2t1',label:'Enroll in MLOps Zoomcamp by DataTalksClub (free)',tag:'course',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://github.com/DataTalksClub/mlops-zoomcamp',linkLabel:'GitHub'},{id:'p2t2',label:'Learn MLflow — experiment tracking and model registry',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://mlflow.org/docs/latest/index.html',linkLabel:'MLflow docs'},{id:'p2t3',label:'Learn Apache Airflow — workflow and pipeline orchestration',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://airflow.apache.org/docs/apache-airflow/stable/index.html',linkLabel:'Airflow docs'},{id:'p2t4',label:'Learn Docker for ML — containerizing models',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://docs.docker.com/get-started/',linkLabel:'Docker docs'},{id:'p2t5',label:'Learn Kubernetes basics — orchestrating containerized workloads',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://kubernetes.io/docs/tutorials/kubernetes-basics/',linkLabel:'K8s docs'},{id:'p2t6',label:'Set up GitHub Actions for CI/CD pipelines',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://docs.github.com/en/actions/learn-github-actions',linkLabel:'GitHub docs'},{id:'p2t7',label:'Learn Weights & Biases — model monitoring',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://docs.wandb.ai/tutorials',linkLabel:'W&B tutorials'},{id:'p2t8',label:'Build portfolio project #1 — end-to-end ML pipeline (MLflow + FastAPI + monitoring)',tag:'project',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://github.com/fmind/mlops-python-package',linkLabel:'Reference repo'}]},{id:'p3',title:'Phase 3 — Cloud specialization (AWS)',sub:'Months 8–13 · Certify on AWS',color:'#4d9fff',numBg:'rgba(77,159,255,0.15)',numColor:'#4d9fff',tasks:[{id:'p3t1',label:'Study for AWS Solutions Architect – Associate (6–8 weeks)',tag:'cert',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://aws.amazon.com/certification/certified-solutions-architect-associate/',linkLabel:'AWS cert page'},{id:'p3t2',label:'Pass AWS Solutions Architect – Associate exam (~$150)',tag:'cert',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://aws.amazon.com/certification/certified-solutions-architect-associate/',linkLabel:'Schedule exam'},{id:'p3t3',label:'Complete MLOps with AWS Bootcamp on Udemy (~$15–20)',tag:'course',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://www.udemy.com/course/mlops-with-aws/',linkLabel:'Udemy'},{id:'p3t4',label:'Study for AWS Certified Machine Learning – Specialty',tag:'cert',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://aws.amazon.com/certification/certified-machine-learning-specialty/',linkLabel:'AWS cert page'},{id:'p3t5',label:'Pass AWS ML Specialty exam (~$300)',tag:'cert',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://aws.amazon.com/certification/certified-machine-learning-specialty/',linkLabel:'Schedule exam'},{id:'p3t6',label:'Build portfolio project #2 — SageMaker deployment with CI/CD via GitHub Actions',tag:'project',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html',linkLabel:'SageMaker docs'}]},{id:'p4',title:'Phase 4 — LLM & generative AI ops',sub:'Months 12–16 · Premium specialization',color:'#ff8c42',numBg:'rgba(255,140,66,0.15)',numColor:'#ff8c42',tasks:[{id:'p4t1',label:'Complete LLMOps course — DeepLearning.AI (free)',tag:'course',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://www.deeplearning.ai/short-courses/llmops/',linkLabel:'DeepLearning.AI'},{id:'p4t2',label:'Learn LangChain and RAG system deployment',tag:'skill',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://python.langchain.com/docs/get_started/introduction',linkLabel:'LangChain docs'},{id:'p4t3',label:'Study LLM fine-tuning workflows (LoRA, QLoRA)',tag:'skill',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://huggingface.co/docs/peft/index',linkLabel:'HuggingFace PEFT'},{id:'p4t4',label:'Learn LLM monitoring and drift detection',tag:'skill',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://docs.wandb.ai/guides/llm-apps',linkLabel:'W&B LLM guide'},{id:'p4t5',label:'Complete Hugging Face free courses — Building LLM Apps',tag:'course',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://huggingface.co/learn',linkLabel:'HuggingFace'},{id:'p4t6',label:'Build portfolio project #3 — RAG chatbot on AWS with monitoring dashboard',tag:'project',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://aws.amazon.com/bedrock/',linkLabel:'AWS Bedrock'}]},{id:'p5',title:'Phase 5 — Portfolio & job hunt',sub:'Months 14–18 · Land the role',color:'#ffb84d',numBg:'rgba(255,184,77,0.15)',numColor:'#ffb84d',tasks:[{id:'p5t1',label:'Publish all 3 portfolio projects to public GitHub repos with READMEs',tag:'portfolio',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://github.com',linkLabel:'GitHub'},{id:'p5t2',label:'Rewrite resume — reframe from IT support to ML platform engineer',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://www.linkedin.com/pulse/mlops-engineer-resume-tips',linkLabel:'Resume tips'},{id:'p5t3',label:'Update LinkedIn — add certifications, projects, and MLOps skills',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://www.linkedin.com/in/byron-walton-jr-35262b84',linkLabel:'Your LinkedIn'},{id:'p5t4',label:'Network in the MLOps community on LinkedIn and DataTalks.Club Slack',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://datatalks.club/slack.html',linkLabel:'DataTalks Slack'},{id:'p5t5',label:'Apply to target roles — MLOps Engineer, ML Platform Engineer, AI Infrastructure Engineer',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://www.linkedin.com/jobs/search/?keywords=MLOps+Engineer+Atlanta',linkLabel:'LinkedIn jobs'},{id:'p5t6',label:'Target Atlanta employers — NCR Voyix, Fiserv, CDC, Lockheed, Delta',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://www.linkedin.com/jobs/search/?keywords=machine+learning+engineer&location=Atlanta%2C+GA',linkLabel:'Atlanta ML jobs'}]}];
-const SPRINT=[{id:'w1',title:'Week 1–2',sub:'Start Python immediately',tasks:[{id:'sw1',label:'Create a public GitHub profile',link:'https://github.com/join',linkLabel:'github.com/join'},{id:'sw2',label:'Enroll in Python for Everybody on Coursera (free)',link:'https://www.coursera.org/specializations/python',linkLabel:'coursera.org'},{id:'sw3',label:'Complete Module 1 of Python for Everybody',link:'https://www.coursera.org/specializations/python',linkLabel:'coursera.org'}]},{id:'w2',title:'Week 3–4',sub:'Add ML concepts',tasks:[{id:'sw4',label:'Start Google ML Crash Course (free)',link:'https://developers.google.com/machine-learning/crash-course',linkLabel:'developers.google.com'},{id:'sw5',label:'Continue Python for Everybody — complete Module 2',link:'https://www.coursera.org/specializations/python',linkLabel:'coursera.org'},{id:'sw6',label:'Bookmark MLOps Zoomcamp on GitHub',link:'https://github.com/DataTalksClub/mlops-zoomcamp',linkLabel:'github.com'}]},{id:'w3',title:'Month 2–3',sub:'Deepen and branch out',tasks:[{id:'sw7',label:'Enroll in MLOps Zoomcamp (free, self-paced)',link:'https://github.com/DataTalksClub/mlops-zoomcamp',linkLabel:'github.com'},{id:'sw8',label:'Set up a personal AWS free tier account',link:'https://aws.amazon.com/free/',linkLabel:'aws.amazon.com/free'},{id:'sw9',label:'Start experimenting with AWS SageMaker',link:'https://aws.amazon.com/sagemaker/',linkLabel:'aws.amazon.com'},{id:'sw10',label:'Complete Google ML Crash Course',link:'https://developers.google.com/machine-learning/crash-course',linkLabel:'developers.google.com'}]}];
+// ─── ANCHOR: May 26, 2026 ───
+const START      = new Date('2026-05-26T00:00:00');
+const MASTER_END = new Date('2027-07-26T00:00:00');
+
+// ─── SPRINT WINDOWS (offset days from START) ───
+const SPRINT_WINDOWS = [
+  { startDay:  0, endDay: 14 },   // Week 1-2
+  { startDay: 14, endDay: 28 },   // Week 3-4
+  { startDay: 28, endDay: 90 },   // Month 2-3
+];
+
+// ─── PHASE WINDOWS (offset days from START) ───
+const PHASE_WINDOWS = [
+  { startDay:   0, endDay: 122 }, // Phase 1
+  { startDay: 122, endDay: 243 }, // Phase 2
+  { startDay: 243, endDay: 395 }, // Phase 3
+  { startDay: 365, endDay: 487 }, // Phase 4
+  { startDay: 426, endDay: 548 }, // Phase 5
+];
+
+// ─── DATA ───
+const PHASES=[
+  {id:'p1',title:'Phase 1 — Python & ML basics',sub:'Months 1–4 · Fill the ML knowledge gap',color:'#a78bfa',numBg:'rgba(167,139,250,0.15)',numColor:'#a78bfa',
+   tasks:[
+    {id:'p1t1',label:'Complete Python for Everybody (Coursera — free to audit)',tag:'course',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://www.coursera.org/specializations/python',linkLabel:'Coursera'},
+    {id:'p1t2',label:'Complete Python Essentials for MLOps (Coursera — Duke)',tag:'course',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://www.coursera.org/learn/python-mlops-duke',linkLabel:'Coursera'},
+    {id:'p1t3',label:'Daily Python practice — 30–45 min on Codewars or HackerRank',tag:'practice',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://www.codewars.com',linkLabel:'Codewars'},
+    {id:'p1t4',label:'Master Python scripting, file I/O, REST APIs, and JSON',tag:'skill',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://docs.python.org/3/tutorial/',linkLabel:'Python docs'},
+    {id:'p1t5',label:'Complete Google ML Crash Course (free, ~15 hours)',tag:'course',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://developers.google.com/machine-learning/crash-course',linkLabel:'Google'},
+    {id:'p1t6',label:"Complete Andrew Ng's Machine Learning Specialization",tag:'course',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://www.coursera.org/specializations/machine-learning-introduction',linkLabel:'Coursera'},
+    {id:'p1t7',label:'Understand model training, evaluation, and overfitting concepts',tag:'skill',tagBg:'rgba(167,139,250,0.15)',tagColor:'#a78bfa',link:'https://developers.google.com/machine-learning/crash-course/overfitting/overfitting',linkLabel:'Google ML'},
+   ]},
+  {id:'p2',title:'Phase 2 — Core MLOps toolchain',sub:'Months 4–8 · Build the MLOps stack',color:'#4fffb0',numBg:'rgba(79,255,176,0.12)',numColor:'#4fffb0',
+   tasks:[
+    {id:'p2t1',label:'Enroll in MLOps Zoomcamp by DataTalksClub (free)',tag:'course',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://github.com/DataTalksClub/mlops-zoomcamp',linkLabel:'GitHub'},
+    {id:'p2t2',label:'Learn MLflow — experiment tracking and model registry',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://mlflow.org/docs/latest/index.html',linkLabel:'MLflow docs'},
+    {id:'p2t3',label:'Learn Apache Airflow — workflow and pipeline orchestration',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://airflow.apache.org/docs/apache-airflow/stable/index.html',linkLabel:'Airflow docs'},
+    {id:'p2t4',label:'Learn Docker for ML — containerizing models',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://docs.docker.com/get-started/',linkLabel:'Docker docs'},
+    {id:'p2t5',label:'Learn Kubernetes basics — orchestrating containerized workloads',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://kubernetes.io/docs/tutorials/kubernetes-basics/',linkLabel:'K8s docs'},
+    {id:'p2t6',label:'Set up GitHub Actions for CI/CD pipelines',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://docs.github.com/en/actions/learn-github-actions',linkLabel:'GitHub docs'},
+    {id:'p2t7',label:'Learn Weights & Biases — model monitoring',tag:'tool',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://docs.wandb.ai/tutorials',linkLabel:'W&B tutorials'},
+    {id:'p2t8',label:'Build portfolio project #1 — end-to-end ML pipeline (MLflow + FastAPI + monitoring)',tag:'project',tagBg:'rgba(79,255,176,0.1)',tagColor:'#4fffb0',link:'https://github.com/fmind/mlops-python-package',linkLabel:'Reference repo'},
+   ]},
+  {id:'p3',title:'Phase 3 — Cloud specialization (AWS)',sub:'Months 8–13 · Certify on AWS',color:'#4d9fff',numBg:'rgba(77,159,255,0.15)',numColor:'#4d9fff',
+   tasks:[
+    {id:'p3t1',label:'Study for AWS Solutions Architect – Associate (6–8 weeks)',tag:'cert',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://aws.amazon.com/certification/certified-solutions-architect-associate/',linkLabel:'AWS cert page'},
+    {id:'p3t2',label:'Pass AWS Solutions Architect – Associate exam (~$150)',tag:'cert',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://aws.amazon.com/certification/certified-solutions-architect-associate/',linkLabel:'Schedule exam'},
+    {id:'p3t3',label:'Complete MLOps with AWS Bootcamp on Udemy (~$15–20)',tag:'course',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://www.udemy.com/course/mlops-with-aws/',linkLabel:'Udemy'},
+    {id:'p3t4',label:'Study for AWS Certified Machine Learning – Specialty',tag:'cert',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://aws.amazon.com/certification/certified-machine-learning-specialty/',linkLabel:'AWS cert page'},
+    {id:'p3t5',label:'Pass AWS ML Specialty exam (~$300)',tag:'cert',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://aws.amazon.com/certification/certified-machine-learning-specialty/',linkLabel:'Schedule exam'},
+    {id:'p3t6',label:'Build portfolio project #2 — SageMaker deployment with CI/CD via GitHub Actions',tag:'project',tagBg:'rgba(77,159,255,0.12)',tagColor:'#4d9fff',link:'https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html',linkLabel:'SageMaker docs'},
+   ]},
+  {id:'p4',title:'Phase 4 — LLM & generative AI ops',sub:'Months 12–16 · Premium specialization',color:'#ff8c42',numBg:'rgba(255,140,66,0.15)',numColor:'#ff8c42',
+   tasks:[
+    {id:'p4t1',label:'Complete LLMOps course — DeepLearning.AI (free)',tag:'course',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://www.deeplearning.ai/short-courses/llmops/',linkLabel:'DeepLearning.AI'},
+    {id:'p4t2',label:'Learn LangChain and RAG system deployment',tag:'skill',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://python.langchain.com/docs/get_started/introduction',linkLabel:'LangChain docs'},
+    {id:'p4t3',label:'Study LLM fine-tuning workflows (LoRA, QLoRA)',tag:'skill',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://huggingface.co/docs/peft/index',linkLabel:'HuggingFace PEFT'},
+    {id:'p4t4',label:'Learn LLM monitoring and drift detection',tag:'skill',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://docs.wandb.ai/guides/llm-apps',linkLabel:'W&B LLM guide'},
+    {id:'p4t5',label:'Complete Hugging Face free courses — Building LLM Apps',tag:'course',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://huggingface.co/learn',linkLabel:'HuggingFace'},
+    {id:'p4t6',label:'Build portfolio project #3 — RAG chatbot on AWS with monitoring dashboard',tag:'project',tagBg:'rgba(255,140,66,0.12)',tagColor:'#ff8c42',link:'https://aws.amazon.com/bedrock/',linkLabel:'AWS Bedrock'},
+   ]},
+  {id:'p5',title:'Phase 5 — Portfolio & job hunt',sub:'Months 14–18 · Land the role',color:'#ffb84d',numBg:'rgba(255,184,77,0.15)',numColor:'#ffb84d',
+   tasks:[
+    {id:'p5t1',label:'Publish all 3 portfolio projects to public GitHub repos with READMEs',tag:'portfolio',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://github.com',linkLabel:'GitHub'},
+    {id:'p5t2',label:'Rewrite resume — reframe from IT support to ML platform engineer',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://www.linkedin.com/pulse/mlops-engineer-resume-tips',linkLabel:'Resume tips'},
+    {id:'p5t3',label:'Update LinkedIn — add certifications, projects, and MLOps skills',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://www.linkedin.com/in/byron-walton-jr-35262b84',linkLabel:'Your LinkedIn'},
+    {id:'p5t4',label:'Network in the MLOps community on LinkedIn and DataTalks.Club Slack',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://datatalks.club/slack.html',linkLabel:'DataTalks Slack'},
+    {id:'p5t5',label:'Apply to target roles — MLOps Engineer, ML Platform Engineer, AI Infrastructure Engineer',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://www.linkedin.com/jobs/search/?keywords=MLOps+Engineer+Atlanta',linkLabel:'LinkedIn jobs'},
+    {id:'p5t6',label:'Target Atlanta employers — NCR Voyix, Fiserv, CDC, Lockheed, Delta',tag:'job',tagBg:'rgba(255,184,77,0.12)',tagColor:'#ffb84d',link:'https://www.linkedin.com/jobs/search/?keywords=machine+learning+engineer&location=Atlanta%2C+GA',linkLabel:'Atlanta ML jobs'},
+   ]},
+];
+
+const SPRINT=[
+  {id:'w1',title:'Week 1–2',sub:'Start Python immediately',
+   tasks:[
+    {id:'sw1',label:'Create a public GitHub profile',link:'https://github.com/join',linkLabel:'github.com/join'},
+    {id:'sw2',label:'Enroll in Python for Everybody on Coursera (free)',link:'https://www.coursera.org/specializations/python',linkLabel:'coursera.org'},
+    {id:'sw3',label:'Complete Module 1 of Python for Everybody',link:'https://www.coursera.org/specializations/python',linkLabel:'coursera.org'},
+   ]},
+  {id:'w2',title:'Week 3–4',sub:'Add ML concepts',
+   tasks:[
+    {id:'sw4',label:'Start Google ML Crash Course (free)',link:'https://developers.google.com/machine-learning/crash-course',linkLabel:'developers.google.com'},
+    {id:'sw5',label:'Continue Python for Everybody — complete Module 2',link:'https://www.coursera.org/specializations/python',linkLabel:'coursera.org'},
+    {id:'sw6',label:'Bookmark MLOps Zoomcamp on GitHub',link:'https://github.com/DataTalksClub/mlops-zoomcamp',linkLabel:'github.com'},
+   ]},
+  {id:'w3',title:'Month 2–3',sub:'Deepen and branch out',
+   tasks:[
+    {id:'sw7',label:'Enroll in MLOps Zoomcamp (free, self-paced)',link:'https://github.com/DataTalksClub/mlops-zoomcamp',linkLabel:'github.com'},
+    {id:'sw8',label:'Set up a personal AWS free tier account',link:'https://aws.amazon.com/free/',linkLabel:'aws.amazon.com/free'},
+    {id:'sw9',label:'Start experimenting with AWS SageMaker',link:'https://aws.amazon.com/sagemaker/',linkLabel:'aws.amazon.com'},
+    {id:'sw10',label:'Complete Google ML Crash Course',link:'https://developers.google.com/machine-learning/crash-course',linkLabel:'developers.google.com'},
+   ]},
+];
+
+// ─── HELPERS ───
 const CHK=`<svg class="check-icon" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>`;
 let state={};
-function load(){try{state=JSON.parse(localStorage.getItem('bw_mlops')||'{}')}catch(e){state={}}}
-function save(){try{localStorage.setItem('bw_mlops',JSON.stringify(state))}catch(e){}}
+function load(){try{state=JSON.parse(localStorage.getItem('bw_mlops_v5')||'{}')}catch(e){state={}}}
+function save(){try{localStorage.setItem('bw_mlops_v5',JSON.stringify(state))}catch(e){}}
 function toggleTask(id){state[id]=!state[id];save();updateUI()}
 function togglePhase(id){state['open_'+id]=!state['open_'+id];save();buildPhases();updateStats()}
-function resetAll(){if(confirm('Reset all progress?')){state={};save();updateUI()}}
+function resetAll(){if(confirm('Reset all progress? Timer anchors will remain.')){
+  const keep={};Object.keys(state).forEach(k=>{if(k.startsWith('open_'))keep[k]=state[k]});
+  state=keep;save();updateUI();}}
+function pad(n){return String(n).padStart(2,'0')}
+
+// Generic window badge — shared by phase, sprint, and task levels
+function windowBadge(startDay,endDay,isDone,small){
+  const cls=small?'cd-badge task-badge':'cd-badge';
+  if(isDone) return `<span class="${cls} complete">✓ Done</span>`;
+  const now=new Date();
+  const winStart=new Date(START.getTime()+startDay*86400000);
+  const winEnd  =new Date(START.getTime()+endDay  *86400000);
+  if(now<winStart){
+    const d=Math.ceil((winStart-now)/86400000);
+    return `<span class="${cls} upcoming">in ${d}d</span>`;
+  }
+  if(now>=winEnd){
+    return `<span class="${cls} overdue">overdue</span>`;
+  }
+  const dLeft=Math.ceil((winEnd-now)/86400000);
+  const w=Math.floor(dLeft/7), d=dLeft%7;
+  const txt=w>0?`${w}w ${d}d`:`${d}d left`;
+  return `<span class="${cls} active">${txt}</span>`;
+}
+
+// Divide a parent window evenly across N tasks
+function taskWindows(parentStartDay,parentEndDay,count){
+  const span=parentEndDay-parentStartDay;
+  const slice=span/count;
+  return Array.from({length:count},(_,i)=>({
+    startDay: parentStartDay + Math.round(i*slice),
+    endDay:   parentStartDay + Math.round((i+1)*slice),
+  }));
+}
+
+// ─── MASTER TIMER ───
+function msToComponents(ms){
+  if(ms<=0)return{months:0,weeks:0,days:0,hours:0,mins:0,secs:0,overdue:true};
+  const s=Math.floor(ms/1000);
+  const secs=s%60, totalM=Math.floor(s/60), mins=totalM%60;
+  const totalH=Math.floor(totalM/60), hours=totalH%24;
+  const totalD=Math.floor(totalH/24);
+  const months=Math.floor(totalD/30.44);
+  const remD=totalD-Math.floor(months*30.44);
+  return{months,weeks:Math.floor(remD/7),days:remD%7,hours,mins,secs,overdue:false};
+}
+
+function updateMasterTimer(){
+  const now=new Date(), rem=MASTER_END-now, total=MASTER_END-START, elapsed=now-START;
+  const pct=Math.min(100,Math.max(0,(elapsed/total)*100));
+  const c=msToComponents(rem);
+  if(c.overdue){
+    ['t-months','t-weeks','t-days','t-hours','t-mins','t-secs'].forEach(id=>document.getElementById(id).textContent='00');
+    const sub=document.getElementById('master-timer-sub');
+    sub.textContent='Roadmap window complete — time to celebrate!';
+    sub.classList.add('timer-overdue');
+  } else {
+    document.getElementById('t-months').textContent=pad(c.months);
+    document.getElementById('t-weeks').textContent=pad(c.weeks);
+    document.getElementById('t-days').textContent=pad(c.days);
+    document.getElementById('t-hours').textContent=pad(c.hours);
+    document.getElementById('t-mins').textContent=pad(c.mins);
+    document.getElementById('t-secs').textContent=pad(c.secs);
+    const dE=Math.max(0,Math.floor(elapsed/86400000));
+    const dT=Math.ceil(total/86400000);
+    document.getElementById('master-timer-sub').textContent=`Started May 26, 2026 · Day ${dE} of ${dT} · Target: July 26, 2027`;
+  }
+  document.getElementById('master-bar-fill').style.width=pct+'%';
+}
+
+// ─── BUILD SPRINT ───
 function buildSprint(){
-  document.getElementById('sprint-grid').innerHTML=SPRINT.map(col=>`
+  document.getElementById('sprint-grid').innerHTML=SPRINT.map((col,ci)=>{
+    const w=SPRINT_WINDOWS[ci];
+    const allDone=col.tasks.every(t=>state[t.id]);
+    const colBadge=windowBadge(w.startDay,w.endDay,allDone,false);
+    const tWins=taskWindows(w.startDay,w.endDay,col.tasks.length);
+    return `
     <div class="sprint-col">
-      <div class="sprint-head"><div class="sprint-head-week">${col.title}</div><div class="sprint-head-sub">${col.sub}</div></div>
-      <div class="sprint-tasks">${col.tasks.map(t=>`
-        <div class="stask">
-          <div class="stask-box${state[t.id]?' done':''}" onclick="toggleTask('${t.id}')">${CHK}</div>
-          <div class="stask-content">
-            <div class="stask-label${state[t.id]?' done':''}" onclick="toggleTask('${t.id}')">${t.label}</div>
-            ${t.link?`<a class="stask-link" href="${t.link}" target="_blank">↗ ${t.linkLabel}</a>`:''}
-          </div>
-        </div>`).join('')}
+      <div class="sprint-head">
+        <div class="sprint-head-top">
+          <div class="sprint-head-week">${col.title}</div>
+          ${colBadge}
+        </div>
+        <div class="sprint-head-sub">${col.sub}</div>
       </div>
-    </div>`).join('')}
+      <div class="sprint-tasks">
+        ${col.tasks.map((t,ti)=>{
+          const tw=tWins[ti];
+          const tBadge=windowBadge(tw.startDay,tw.endDay,!!state[t.id],true);
+          return `<div class="stask">
+            <div class="stask-box${state[t.id]?' done':''}" onclick="toggleTask('${t.id}')">${CHK}</div>
+            <div class="stask-content">
+              <div class="stask-top">
+                <div class="stask-label${state[t.id]?' done':''}" onclick="toggleTask('${t.id}')">${t.label}</div>
+                ${tBadge}
+              </div>
+              ${t.link?`<a class="stask-link" href="${t.link}" target="_blank">↗ ${t.linkLabel}</a>`:''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── BUILD PHASES ───
 function buildPhases(){
-  document.getElementById('phases-container').innerHTML=PHASES.map((ph,idx)=>{
-    const done=ph.tasks.filter(t=>state[t.id]).length,total=ph.tasks.length,pct=total?Math.round(done/total*100):0,isOpen=!!state['open_'+ph.id];
+  document.getElementById('phases-container').innerHTML=PHASES.map((ph,pi)=>{
+    const done=ph.tasks.filter(t=>state[t.id]).length;
+    const total=ph.tasks.length;
+    const pct=total?Math.round(done/total*100):0;
+    const isOpen=!!state['open_'+ph.id];
+    const pw=PHASE_WINDOWS[pi];
+    const phaseBadge=windowBadge(pw.startDay,pw.endDay,done===total,false);
+    const tWins=taskWindows(pw.startDay,pw.endDay,total);
     return `<div class="phase-card">
       <div class="phase-header" onclick="togglePhase('${ph.id}')">
-        <div class="phase-num" style="background:${ph.numBg};color:${ph.numColor};">${idx+1}</div>
-        <div class="phase-info"><div class="phase-title">${ph.title}</div><div class="phase-sub">${ph.sub}</div></div>
+        <div class="phase-num" style="background:${ph.numBg};color:${ph.numColor};">${pi+1}</div>
+        <div class="phase-info">
+          <div class="phase-title">${ph.title}</div>
+          <div class="phase-sub">${ph.sub}</div>
+        </div>
         <div class="phase-right">
+          ${phaseBadge}
           <div class="phase-pct">${pct}%</div>
           <div class="pbar-wrap"><div class="pbar-fill" style="width:${pct}%;background:${ph.color};"></div></div>
           <svg class="chevron${isOpen?' open':''}" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="${ph.color}" stroke-width="1.8"><path d="M1 1l4 4 4-4"/></svg>
         </div>
       </div>
-      <div class="phase-body${isOpen?' open':''}">${ph.tasks.map(t=>`
-        <div class="task-row">
-          <div class="task-box${state[t.id]?' done':''}" onclick="toggleTask('${t.id}')">${CHK}</div>
-          <div class="task-content">
-            <div class="task-label${state[t.id]?' done':''}" onclick="toggleTask('${t.id}')">${t.label}</div>
-            <div class="task-meta">
-              <span class="task-tag" style="background:${t.tagBg};color:${t.tagColor};">${t.tag}</span>
-              ${t.link?`<a class="task-link" href="${t.link}" target="_blank" style="color:${t.tagColor};">↗ ${t.linkLabel}</a>`:''}
+      <div class="phase-body${isOpen?' open':''}">
+        ${ph.tasks.map((t,ti)=>{
+          const tw=tWins[ti];
+          const tBadge=windowBadge(tw.startDay,tw.endDay,!!state[t.id],true);
+          return `<div class="task-row">
+            <div class="task-box${state[t.id]?' done':''}" onclick="toggleTask('${t.id}')">${CHK}</div>
+            <div class="task-content">
+              <div class="task-top">
+                <div class="task-label${state[t.id]?' done':''}" onclick="toggleTask('${t.id}')">${t.label}</div>
+                ${tBadge}
+              </div>
+              <div class="task-meta">
+                <span class="task-tag" style="background:${t.tagBg};color:${t.tagColor};">${t.tag}</span>
+                ${t.link?`<a class="task-link" href="${t.link}" target="_blank" style="color:${t.tagColor};">↗ ${t.linkLabel}</a>`:''}
+              </div>
             </div>
-          </div>
-        </div>`).join('')}
+          </div>`;
+        }).join('')}
       </div>
-    </div>`}).join('')}
+    </div>`;
+  }).join('');
+}
+
+// ─── STATS ───
 function updateStats(){
   let total=0,done=0,started=0;
   PHASES.forEach(ph=>{const d=ph.tasks.filter(t=>state[t.id]).length;total+=ph.tasks.length;done+=d;if(d>0)started++});
@@ -173,8 +449,11 @@ function updateStats(){
   document.getElementById('stat-phases').innerHTML=`${started}<span class="unit"> / 5</span>`;
   document.getElementById('stat-sprint').innerHTML=`${spAll.length?Math.round(spDone/spAll.length*100):0}<span class="unit">%</span>`;
 }
+
 function updateUI(){buildSprint();buildPhases();updateStats()}
 load();updateUI();
+updateMasterTimer();
+setInterval(()=>{updateMasterTimer();buildSprint();buildPhases();},1000);
 </script>
 </body>
 </html>
